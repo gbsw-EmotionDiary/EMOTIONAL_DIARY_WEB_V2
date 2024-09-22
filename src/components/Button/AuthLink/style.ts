@@ -21,16 +21,16 @@ export const AuthLink = styled(Link)<VariantType>`
   border-radius: 10px;
 
   background-color: ${({ variant }) =>
-    variant === "signIn" ? "#C9E58B" : "none"};
+    variant === "signIn" ? "#C9E58B" : "transparent"};
   color: ${({ variant }) => (variant === "signIn" ? "#ffffff" : "#000000")};
 
-  transition: background-color 0.15s ease-in, box-shadow 0.15s ease-in;
+  transition: background-color 0.15s ease-in, box-shadow 0.25s ease-in;
 
   &:hover {
     background-color: ${({ variant }) =>
       variant === "signIn" ? "#B8D47A" : "none"};
 
     box-shadow: ${({ variant }) =>
-      variant === "signUp" ? "0 8px 15px rgba(0, 0, 0, 0.08)" : "none"};
+      variant === "signUp" ? "0 8px 15px rgba(0, 0, 0, 0.08)" : "transparent"};
   }
 `;

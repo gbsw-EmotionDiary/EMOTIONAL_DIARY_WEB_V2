@@ -3,11 +3,12 @@ import styled from "styled-components";
 export const Home = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: #f8f7f4;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  background-color: #f8f7f4;
 `;
 
 export const MainArea = styled.main`
@@ -37,6 +38,10 @@ export const AuthArea = styled.div`
 
   .subTitle {
     font-size: 17px;
+  }
+
+  .emphasis {
+    color: #e58b8b;
   }
 `;
 

@@ -27,7 +27,8 @@
     "paths": {
       "@src/*": ["src/*"],
       "@pages/*": ["src/pages/*"],
-      "@api/*": ["src/api/axios.ts"],
+      "@api/*": ["src/api/*"],
+      "@hooks/*": ["src/hooks/*"],
       "@components/*": ["src/components/*"],
       "@imgs": ["src/assets/imgs/*"]
     }

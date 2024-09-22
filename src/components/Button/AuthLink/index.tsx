@@ -1,14 +1,12 @@
-import * as S from './style'
-
-import React from 'react'
+import * as S from "./style"
 
 type BtnType = {
     path: string
     variant: 'signIn' | 'signUp'
-    children: React.ReactNode
+    children: string
 }
 
-const AuthButton = ({ path, variant, children }: BtnType): React.ReactElement => {
+const AuthLink = ({ path, variant, children }: BtnType) => {
     return (
         <>
             <S.AuthLink to={path} variant={variant}>
@@ -18,4 +16,4 @@ const AuthButton = ({ path, variant, children }: BtnType): React.ReactElement =>
     )
 }
 
-export default AuthButton
+export default AuthLink
