@@ -76,7 +76,7 @@ const useAuth = () => {
       localStorage.setItem("id", id);
 
       alert("로그인이 완료되었습니다.");
-      navigate("/");
+      navigate("/home");
     } catch (error: any) {
       setError(true);
       console.log(error.response.data);

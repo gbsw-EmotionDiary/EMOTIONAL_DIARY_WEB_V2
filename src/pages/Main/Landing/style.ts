@@ -30,6 +30,7 @@ export const AuthArea = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #001f3f;
 
   .title {
     font-family: "SBAggroB";
@@ -41,7 +42,7 @@ export const AuthArea = styled.div`
   }
 
   .emphasis {
-    color: #e58b8b;
+    color: #ff6b6b;
   }
 `;
 

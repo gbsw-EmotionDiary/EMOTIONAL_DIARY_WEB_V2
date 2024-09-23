@@ -7,7 +7,7 @@ export const AuthBtn = styled.button`
   padding: 15px;
   gap: 10px;
 
-  background-color: #c9e58b;
+  background-color: #a8d8a2;
   color: #fff;
 
   border: none;
@@ -18,6 +18,6 @@ export const AuthBtn = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: #b8d47a;
+    background-color: #9bcb8b;
   }
 `;

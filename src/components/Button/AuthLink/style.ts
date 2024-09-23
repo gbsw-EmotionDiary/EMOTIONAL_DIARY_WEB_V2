@@ -17,19 +17,18 @@ export const AuthLink = styled(Link)<VariantType>`
   font-weight: 500;
 
   border: ${({ variant }) =>
-    variant === "signIn" ? "none" : "2px solid #C9E58B"};
+    variant === "signIn" ? "none" : "2px solid #A8D8A2"};
   border-radius: 10px;
 
   background-color: ${({ variant }) =>
-    variant === "signIn" ? "#C9E58B" : "transparent"};
-  color: ${({ variant }) => (variant === "signIn" ? "#ffffff" : "#000000")};
+    variant === "signIn" ? "#A8D8A2" : "transparent"};
+  color: ${({ variant }) => (variant === "signIn" ? "#ffffff" : "#333333")};
 
   transition: background-color 0.15s ease-in, box-shadow 0.25s ease-in;
 
   &:hover {
     background-color: ${({ variant }) =>
-      variant === "signIn" ? "#B8D47A" : "none"};
-
+      variant === "signIn" ? "#9BCB8B" : "none"};
     box-shadow: ${({ variant }) =>
       variant === "signUp" ? "0 8px 15px rgba(0, 0, 0, 0.08)" : "transparent"};
   }

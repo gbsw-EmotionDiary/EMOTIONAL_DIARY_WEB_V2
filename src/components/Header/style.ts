@@ -13,13 +13,13 @@ export const HeaderArea = styled.header`
   top: 0;
   z-index: 10;
 
-  background-color: #f8f7f4;
+  background-color: #ffffff;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.07);
 
   transition: background-color 0.25s ease-in, box-shadow 0.25s ease-in;
 
   &.scrolled {
-    background-color: rgba(244, 244, 244, 0.9);
+    background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.01);
   }
 
@@ -31,6 +31,27 @@ export const HeaderArea = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+`;
+
+export const LoggedInWrap = styled(Link)`
+  width: 100%;
+  max-width: 180px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .symbolMark {
+    max-width: 40px;
+  }
+
+  .userId {
+    font-size: 15px;
+  }
+
+  .desc {
+    color: #e58b8b;
   }
 `;
 
@@ -51,6 +72,7 @@ export const SymobolWrap = styled(Link)`
     font-size: 18px;
   }
 `;
+
 export const AuthWrap = styled.div`
   width: 100%;
   max-width: 110px;
@@ -67,14 +89,6 @@ export const AuthUser = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  .userId {
-    font-size: 15px;
-  }
-
-  .desc {
-    color: #e58b8b;
-  }
 `;
 
 export const AuthLink = styled(Link)`

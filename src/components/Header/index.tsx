@@ -23,20 +23,27 @@ const Header = () => {
     return (
         <S.HeaderArea className={scrolled ? "scrolled" : ""}>
             <header>
-                <S.SymobolWrap to={"/"}>
-                    <img src={SymbolMark} alt="symbol-mark" className="symbolMark" />
-                    <h1 className="title">감정일기</h1>
-                </S.SymobolWrap>
                 {isLoggedIn ? (
-                    <S.AuthUser>
-                        <h1 className="userId"><span className="desc">{id}</span>님, 환영합니다.</h1>
-                        <S.AuthLink to={"/"} onClick={handleLogout}>로그아웃</S.AuthLink>
-                    </S.AuthUser>
+                    <>
+                        <S.LoggedInWrap to={"/home"}>
+                            <img src={SymbolMark} alt="symbol-mark" className="symbolMark" />
+                            <h1 className="userId"><span className="desc">{id}</span>님, 환영합니다.</h1>
+                        </S.LoggedInWrap>
+                        <S.AuthUser>
+                            <S.AuthLink to={"/"} onClick={handleLogout}>로그아웃</S.AuthLink>
+                        </S.AuthUser>
+                    </>
                 ) : (
-                    <S.AuthWrap>
-                        <S.AuthLink to={"/signin"}>로그인</S.AuthLink>
-                        <S.AuthLink to={"/signup"}>회원가입</S.AuthLink>
-                    </S.AuthWrap>
+                    <>
+                        <S.SymobolWrap to={"/"}>
+                            <img src={SymbolMark} alt="symbol-mark" className="symbolMark" />
+                            <h1 className="title">감정일기</h1>
+                        </S.SymobolWrap>
+                        <S.AuthWrap>
+                            <S.AuthLink to={"/signin"}>로그인</S.AuthLink>
+                            <S.AuthLink to={"/signup"}>회원가입</S.AuthLink>
+                        </S.AuthWrap>
+                    </>
                 )}
             </header>
         </S.HeaderArea>

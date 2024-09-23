@@ -1,4 +1,5 @@
 import Landing from "@pages/Main/Landing/index";
+import Home from "@pages/Main/Home";
 import SignIn from "@pages/User/SignIn";
 import SignUp from "@pages/User/SignUp";
 
@@ -11,6 +12,7 @@ import LinkIn from "@components/LinkIn";
 
 export {
   Landing,
+  Home,
   SignUp,
   SignIn,
   Header,
