@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { customAxios } from "@src/api/axios";
 
@@ -11,6 +11,15 @@ const useAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
+
+  // 로컬 스토리지에서 사용자 정보 초기화
+  useEffect(() => {
+    const storedId = localStorage.getItem("id");
+    if (storedId) {
+      setId(storedId);
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const handleSignUp = async (e: any) => {
     e.preventDefault();

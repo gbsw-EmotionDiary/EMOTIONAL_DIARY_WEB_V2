@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 const Header = () => {
     const { id, isLoggedIn, handleLogout } = useAuth();
     const [scrolled, setScrolled] = useState(false);
-    console.log(isLoggedIn);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -29,10 +28,10 @@ const Header = () => {
                     <h1 className="title">감정일기</h1>
                 </S.SymobolWrap>
                 {isLoggedIn ? (
-                    <S.AuthWrap>
-                        <S.AuthLink to={"/"}>{id}님, 환영합니다.</S.AuthLink>
+                    <S.AuthUser>
+                        <h1 className="userId"><span className="desc">{id}</span>님, 환영합니다.</h1>
                         <S.AuthLink to={"/"} onClick={handleLogout}>로그아웃</S.AuthLink>
-                    </S.AuthWrap>
+                    </S.AuthUser>
                 ) : (
                     <S.AuthWrap>
                         <S.AuthLink to={"/signin"}>로그인</S.AuthLink>

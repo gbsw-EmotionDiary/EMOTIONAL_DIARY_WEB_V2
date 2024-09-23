@@ -24,8 +24,8 @@ const SignIn = () => {
          <C.Header />
          <S.SignInArea onSubmit={handleSignIn}>
             <S.WelcomeMessage>
-               <h1 className="welcomeTitle">감정일기에 오신것을 환영합니다!</h1>
-               <h2 className="welcomeSubTitle">오늘 하루의 감정을 적어봐요.</h2>
+               <h1 className="welcomeTitle">감정일기에 다시 온 걸 환영해요!</h1>
+               <h2 className="welcomeSubTitle">오늘도 하루의 감정을 적어봐요.</h2>
             </S.WelcomeMessage>
             <S.FormWrap>
                <S.SignInForm action="submit">

@@ -60,6 +60,23 @@ export const AuthWrap = styled.div`
   justify-content: space-between;
 `;
 
+export const AuthUser = styled.div`
+  width: 100%;
+  max-width: 200px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .userId {
+    font-size: 15px;
+  }
+
+  .desc {
+    color: #e58b8b;
+  }
+`;
+
 export const AuthLink = styled(Link)`
   font-size: 15px;
   font-family: 600;
