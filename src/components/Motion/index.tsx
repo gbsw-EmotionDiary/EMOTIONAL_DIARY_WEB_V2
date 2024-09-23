@@ -17,4 +17,4 @@ const Motion = React.memo(() => {
         </S.SymbolArea>
     );
 });
-export default Motion;
+export default Motion

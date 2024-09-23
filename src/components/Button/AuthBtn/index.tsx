@@ -11,4 +11,4 @@ const AuthBtn = ({ children }: BtnType) => {
         </>
     )
 }
-export default AuthBtn;
+export default AuthBtn

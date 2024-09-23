@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const SignInArea = styled.div`
   width: 100%;
   height: 100vh;
+  padding-top: 80px;
 
   display: flex;
   flex-direction: column;

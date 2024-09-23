@@ -18,4 +18,4 @@ const EmotionIcons = () => {
         <S.Symbol src={getRandomEmotion()} alt="emotions" draggable={false} />
     )
 }
-export default EmotionIcons;
+export default EmotionIcons

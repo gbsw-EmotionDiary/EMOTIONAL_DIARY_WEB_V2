@@ -24,9 +24,11 @@ const SignUp = () => {
                <title>감정일기 - 로그인</title>
             </Helmet>
          </HelmetProvider>
+
+         <C.Header />
          <S.SignUpArea onSubmit={handleSignUp}>
             <S.WelcomeMessage>
-               <h1 className="welcomeTitle">감정일기에 처음오신 여   러분을 환영합니다!</h1>
+               <h1 className="welcomeTitle">감정일기에 처음오신 여러분을 환영합니다!</h1>
                <h2 className="welcomeSubTitle">오늘부터 여러분의 감정을 기록해 보세요.</h2>
             </S.WelcomeMessage>
             <S.FormWrap>
@@ -79,4 +81,4 @@ const SignUp = () => {
    )
 }
 
-export default SignUp;
+export default SignUp

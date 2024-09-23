@@ -21,6 +21,7 @@ const SignIn = () => {
             </Helmet>
          </HelmetProvider>
 
+         <C.Header />
          <S.SignInArea onSubmit={handleSignIn}>
             <S.WelcomeMessage>
                <h1 className="welcomeTitle">감정일기에 오신것을 환영합니다!</h1>

@@ -16,4 +16,4 @@ const LinkIn = ({ path, children }: LinkType) => {
         </>
     )
 }
-export default LinkIn;
+export default LinkIn

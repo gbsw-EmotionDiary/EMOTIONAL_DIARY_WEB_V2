@@ -7,7 +7,8 @@ const Landing = () => {
 
     return (
         <>
-            <S.Home>
+            <C.Header />
+            <S.Landing>
                 <S.MainArea>
                     <img src={SymbolMark} alt="Symbol-Marks" className="symbolMark" />
                     <S.AuthArea>
@@ -19,7 +20,7 @@ const Landing = () => {
                         </S.UserWrap>
                     </S.AuthArea>
                 </S.MainArea>
-            </S.Home>
+            </S.Landing>
         </>
     )
 }

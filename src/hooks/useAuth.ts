@@ -8,6 +8,7 @@ const useAuth = () => {
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [error, setError] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
@@ -54,10 +55,16 @@ const useAuth = () => {
         return;
       }
 
-      await customAxios.post("/api/user/signin", {
+      const response = await customAxios.post("/api/user/signin", {
         id,
         password,
       });
+
+      setName(response.data.name);
+      setIsLoggedIn(true);
+
+      // 로컬 스토리지에서 사용자 정보 저장
+      localStorage.setItem("id", id);
 
       alert("로그인이 완료되었습니다.");
       navigate("/");
@@ -68,12 +75,26 @@ const useAuth = () => {
     }
   };
 
+  const handleLogout = () => {
+    setId("");
+    setName("");
+    setPassword("");
+    setPasswordCheck("");
+    setIsLoggedIn(false);
+
+    alert("로그아웃되었습니다.");
+
+    // 로컬 스토리지에서 사용자 정보 제거
+    localStorage.removeItem("id");
+  };
+
   return {
     id,
     name,
     password,
     passwordCheck,
     error,
+    isLoggedIn,
     setId,
     setName,
     setPassword,
@@ -81,6 +102,7 @@ const useAuth = () => {
     setError,
     handleSignUp,
     handleSignIn,
+    handleLogout,
   };
 };
 export default useAuth;
