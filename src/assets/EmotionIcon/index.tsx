@@ -7,7 +7,7 @@ import Lovely from "@imgs/Lovely.png";
 import Sadness from "@imgs/Sadness.png";
 
 interface EmotionIconProps {
-  emotion: number;
+  emotion: number
 }
 
 const EmotionIcon: React.FC<EmotionIconProps> = ({ emotion }) => {

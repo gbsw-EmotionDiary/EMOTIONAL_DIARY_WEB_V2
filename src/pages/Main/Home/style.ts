@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+interface EmotionBtnProps {
+  active: boolean;
+}
+
+interface EmotionColorProps {
+  color: string;
+}
+
 export const Day = styled.div`
   aspect-ratio: 1;
   display: flex;
@@ -25,13 +33,13 @@ export const Day = styled.div`
   }
 `;
 
-export const HasDiary = styled.div`
+export const HasDiary = styled.div<EmotionColorProps>`
   position: absolute;
   bottom: 5px;
   right: 5px;
   width: 8px;
   height: 8px;
-  background-color: #4caf50;
+  background-color: ${(props) => props.color};
   border-radius: 50%;
 `;
 
@@ -42,8 +50,13 @@ export const EmptyDay = styled.div`
 `;
 
 export const DiaryArea = styled.div`
-  max-width: 700px;
+  width: 100%;
   height: 100vh;
+  background-color: #f8f7f4;
+`;
+
+export const DiaryWrap = styled.div`
+  max-width: 700px;
   margin: 0 auto;
   padding-top: 100px;
   font-family: Arial, sans-serif;
@@ -131,26 +144,20 @@ export const EmotionGrid = styled.div`
   gap: 5px;
 `;
 
-export const EmotionBtn = styled.button`
+export const EmotionBtn = styled.button<EmotionBtnProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 65px;
   height: 50px;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
-  color: #333;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s, color 0.3s;
+  transition: scale 0.3s;
+  scale: ${(props) => (props.active ? 1.45 : 1)};
 
   &:hover {
-    background-color: #e0e0e0;
-  }
-
-  &.selected {
-    background-color: #fff;
-    color: white;
+    scale: ${(props) => (props.active ? 1.45 : 1.2)};
   }
 `;
 

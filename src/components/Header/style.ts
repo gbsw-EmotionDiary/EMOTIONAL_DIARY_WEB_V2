@@ -13,14 +13,14 @@ export const HeaderArea = styled.header`
   top: 0;
   z-index: 10;
 
-  background-color: #ffffff;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.07);
+  background-color: #f8f7f4;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
 
   transition: background-color 0.25s ease-in, box-shadow 0.25s ease-in;
 
   &.scrolled {
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.01);
+    background-color: rgba(248, 247, 244, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
   }
 
   & > header {
@@ -51,7 +51,7 @@ export const LoggedInWrap = styled(Link)`
   }
 
   .desc {
-    color: #e58b8b;
+    color: #ff6b6b;
   }
 `;
 
@@ -70,6 +70,7 @@ export const SymobolWrap = styled(Link)`
   .title {
     font-family: "SBAggroB";
     font-size: 18px;
+    color: #001f3f;
   }
 `;
 
@@ -96,6 +97,6 @@ export const AuthLink = styled(Link)`
   font-family: 600;
 
   &:hover {
-    color: #a3bf63;
+    color: #82b77f;
   }
 `;

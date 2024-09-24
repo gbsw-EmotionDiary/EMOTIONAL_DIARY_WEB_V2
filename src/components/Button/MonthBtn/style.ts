@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MonthBtn = styled.button`
-  background-color: #c9e58b;
+  background-color: #27ae60;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -15,6 +15,6 @@ export const MonthBtn = styled.button`
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #b8d47a;
+    background-color: #229954;
   }
 `;

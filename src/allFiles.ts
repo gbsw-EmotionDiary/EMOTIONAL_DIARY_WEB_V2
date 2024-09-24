@@ -10,6 +10,8 @@ import Motion from "@components/Motion";
 import EmotionIcons from "@components/Motion/EmotionIcons";
 import LinkIn from "@components/LinkIn";
 
+import EmotionIcon from "@assets/EmotionIcon";
+
 export {
   Landing,
   Home,
@@ -21,4 +23,5 @@ export {
   Motion,
   EmotionIcons,
   LinkIn,
+  EmotionIcon,
 };

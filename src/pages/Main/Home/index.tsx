@@ -1,15 +1,23 @@
-import * as S from "./style"
+import * as C from "@src/allFiles";
+import * as S from "./style";
 
 import { Header } from "@src/allFiles";
 import useDiary from "@src/hooks/useDiary";
 import MonthBtn from "@src/components/Button/MonthBtn";
-import SaveCancelBtn from "@src/components/Button/SaveCancelBtn";
-import EmotionIcon from "@src/assets/EmotionIcon";
+import ActionBtn from "@src/components/Button/ActionBtn";
 
 import { useState } from "react";
 import moment from "moment";
 
-function Calendar() {
+export const emotionColors: { [key: number]: string } = {
+    1: "#C9E58B",
+    2: "#D4B8E4",
+    3: "#95B9D7",
+    4: "#D37A7A",
+    5: "#F7D5CF",
+};
+
+const Calendar = () => {
     const [currentDate, setCurrentDate] = useState(moment());
     const [selectedDate, setSelectedDate] = useState<moment.Moment | null>(null);
     const [modalOpen, setModalOpen] = useState(false);
@@ -17,6 +25,7 @@ function Calendar() {
     const {
         diaries,
         diaryDto,
+        activeEmotion,
         setDiaryDto,
         handleSaveDiary,
         handleDeleteDiary,
@@ -31,6 +40,8 @@ function Calendar() {
     const handleNextMonth = () => {
         setCurrentDate(currentDate.clone().add(1, "month"));
     };
+
+
 
     const handleDateClick = (day: moment.Moment) => {
         const formattedDate = day.format("YYYY-MM-DD");
@@ -66,12 +77,11 @@ function Calendar() {
             days.push(
                 <S.Day
                     key={formattedDate}
-                    className={`${isToday ? "today" : ""} ${isWeekend ? "weekend" : ""
-                        }`}
+                    className={`${isToday ? "today" : ""} ${isWeekend ? "weekend" : ""}`}
                     onClick={() => handleDateClick(clonedDay)}
                 >
                     <span>{clonedDay.date()}</span>
-                    {diaries[formattedDate] && <S.HasDiary></S.HasDiary>}
+                    {diaries[formattedDate] && <S.HasDiary color={emotionColors[diaries[formattedDate].emotion]} />}
                 </S.Day>
             );
             day.add(1, "day");
@@ -88,70 +98,64 @@ function Calendar() {
         <>
             <Header />
             <S.DiaryArea>
-                <S.CalendarArea>
-                    <S.MonthControl>
-                        <MonthBtn onClick={handlePrevMonth}>
-                            이전 달
-                        </MonthBtn>
-                        <h3 className="monthYear">
-                            {currentDate.format("YYYY년 M월")}
-                        </h3>
-                        <MonthBtn onClick={handleNextMonth}>
-                            다음 달
-                        </MonthBtn>
-                    </S.MonthControl>
-                    <S.WeekDayControl>
-                        {["일", "월", "화", "수", "목", "금", "토"].map((day, index) => (
-                            <div
-                                key={day}
-                                className={`${"weekDay"} ${index === 0 || index === 6 ? "weekend" : ""}`}
-                            >
-                                {day}
+                <S.DiaryWrap>
+                    <S.CalendarArea>
+                        <S.MonthControl>
+                            <MonthBtn onClick={handlePrevMonth}>이전 달</MonthBtn>
+                            <h3 className="monthYear">{currentDate.format("YYYY년 M월")}</h3>
+                            <MonthBtn onClick={handleNextMonth}>다음 달</MonthBtn>
+                        </S.MonthControl>
+                        <S.WeekDayControl>
+                            {["일", "월", "화", "수", "목", "금", "토"].map((day, index) => (
+                                <div
+                                    key={day}
+                                    className={`weekDay ${index === 0 || index === 6 ? "weekend" : ""}`}
+                                >
+                                    {day}
+                                </div>
+                            ))}
+                        </S.WeekDayControl>
+                        <S.DaysGrid>{renderDays()}</S.DaysGrid>
+                    </S.CalendarArea>
+                    {modalOpen && selectedDate && (
+                        <S.Modal>
+                            <h3 className="todayTitle">{selectedDate.format("YYYY년 M월 D일")}</h3>
+                            <input
+                                type="text"
+                                name="title"
+                                value={diaryDto.title}
+                                onChange={handleInputChange}
+                                placeholder="제목"
+                                className="diaryTitle"
+                            />
+                            <textarea
+                                name="content"
+                                value={diaryDto.content}
+                                onChange={handleInputChange}
+                                placeholder="일기 내용을 입력하세요."
+                                className="diaryChildren"
+                            />
+                            <div className="emotionSelector">
+                                <S.EmotionGrid>
+                                    {[1, 2, 3, 4, 5].map((emotion) => (
+                                        <S.EmotionBtn
+                                            key={emotion}
+                                            onClick={() => handleEmotionSelect(emotion)}
+                                            active={activeEmotion === emotion}
+                                        >
+                                            <C.EmotionIcon emotion={emotion} />
+                                        </S.EmotionBtn>
+                                    ))}
+                                </S.EmotionGrid>
                             </div>
-                        ))}
-                    </S.WeekDayControl>
-                    <S.DaysGrid>{renderDays()}</S.DaysGrid>
-                </S.CalendarArea>
-                {modalOpen && selectedDate && (
-                    <S.Modal>
-                        <h3 className="todayTitle">{selectedDate.format("YYYY년 M월 D일")}</h3>
-                        <input
-                            type="text"
-                            name="title"
-                            value={diaryDto.title}
-                            onChange={handleInputChange}
-                            placeholder="제목"
-                            className="diaryTitle"
-                        />
-                        <textarea
-                            name="content"
-                            value={diaryDto.content}
-                            onChange={handleInputChange}
-                            placeholder="일기 내용을 입력하세요."
-                            className="diaryChildren"
-                        />
-                        <div className="emotionSelector">
-                            <S.EmotionGrid>
-                                {[1, 2, 3, 4, 5].map((emotion) => (
-                                    <S.EmotionBtn
-                                        key={emotion}
-                                        onClick={() => handleEmotionSelect(emotion)}
-                                        className={diaryDto.emotion === emotion ? "selected" : ""}
-                                    >
-                                        <EmotionIcon emotion={emotion} />
-                                    </S.EmotionBtn>
-                                ))}
-                            </S.EmotionGrid>
-                        </div>
-                        <S.ServiceArea>
-                            <SaveCancelBtn onClick={handleSaveDiary}>저장</SaveCancelBtn>
-                            {diaries[diaryDto.date] && <SaveCancelBtn onClick={handleDeleteDiary}>삭제</SaveCancelBtn>}
-                            <SaveCancelBtn onClick={() => setModalOpen(false)}>취소</SaveCancelBtn>
-                        </S.ServiceArea>
-
-                    </S.Modal>
-
-                )}
+                            <S.ServiceArea>
+                                <ActionBtn onClick={handleSaveDiary} variant="save">저장</ActionBtn>
+                                {diaries[diaryDto.date] && <ActionBtn onClick={handleDeleteDiary} variant="del">삭제</ActionBtn>}
+                                <ActionBtn onClick={() => setModalOpen(false)} variant="cancel">취소</ActionBtn>
+                            </S.ServiceArea>
+                        </S.Modal>
+                    )}
+                </S.DiaryWrap>
             </S.DiaryArea>
         </>
     );

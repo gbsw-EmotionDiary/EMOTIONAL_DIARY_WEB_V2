@@ -14,6 +14,7 @@ interface DiariesMap {
 }
 
 const useDiary = (currentDate: moment.Moment) => {
+  const [activeEmotion, setActiveEmotion] = useState<number | null>(null);
   const [diaries, setDiaries] = useState<DiariesMap>({});
   const [diaryDto, setDiaryDto] = useState<Diary>({
     date: "",
@@ -50,6 +51,7 @@ const useDiary = (currentDate: moment.Moment) => {
         await writeDiary(diaryDto);
       }
       fetchDiaries();
+      alert("일기가 저장되었습니다!");
     } catch (error) {
       alert("일기 저장에 실패했습니다.");
     }
@@ -73,11 +75,13 @@ const useDiary = (currentDate: moment.Moment) => {
 
   const handleEmotionSelect = (emotion: number) => {
     setDiaryDto((prev) => ({ ...prev, emotion }));
+    setActiveEmotion(emotion);
   };
 
   return {
     diaries,
     diaryDto,
+    activeEmotion,
     setDiaryDto,
     fetchDiaries,
     handleSaveDiary,
