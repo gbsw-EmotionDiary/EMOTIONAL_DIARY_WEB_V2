@@ -1,10 +1,7 @@
 import * as C from "@src/allFiles";
 import * as S from "./style";
 
-import { Header } from "@src/allFiles";
 import useDiary from "@src/hooks/useDiary";
-import MonthBtn from "@src/components/Button/MonthBtn";
-import ActionBtn from "@src/components/Button/ActionBtn";
 
 import { useState } from "react";
 import moment from "moment";
@@ -96,14 +93,14 @@ const Calendar = () => {
 
     return (
         <>
-            <Header />
+            <C.Header />
             <S.DiaryArea>
                 <S.DiaryWrap>
                     <S.CalendarArea>
                         <S.MonthControl>
-                            <MonthBtn onClick={handlePrevMonth}>이전 달</MonthBtn>
+                            <C.MonthBtn onClick={handlePrevMonth}>이전 달</C.MonthBtn>
                             <h3 className="monthYear">{currentDate.format("YYYY년 M월")}</h3>
-                            <MonthBtn onClick={handleNextMonth}>다음 달</MonthBtn>
+                            <C.MonthBtn onClick={handleNextMonth}>다음 달</C.MonthBtn>
                         </S.MonthControl>
                         <S.WeekDayControl>
                             {["일", "월", "화", "수", "목", "금", "토"].map((day, index) => (
@@ -149,9 +146,9 @@ const Calendar = () => {
                                 </S.EmotionGrid>
                             </div>
                             <S.ServiceArea>
-                                <ActionBtn onClick={handleSaveDiary} variant="save">저장</ActionBtn>
-                                {diaries[diaryDto.date] && <ActionBtn onClick={handleDeleteDiary} variant="del">삭제</ActionBtn>}
-                                <ActionBtn onClick={() => setModalOpen(false)} variant="cancel">취소</ActionBtn>
+                                <C.ActionBtn onClick={handleSaveDiary} variant="save">저장</C.ActionBtn>
+                                {diaries[diaryDto.date] && <C.ActionBtn onClick={handleDeleteDiary} variant="del">삭제</C.ActionBtn>}
+                                <C.ActionBtn onClick={() => setModalOpen(false)} variant="cancel">취소</C.ActionBtn>
                             </S.ServiceArea>
                         </S.Modal>
                     )}

@@ -9,8 +9,9 @@ import AuthLink from "@components/Button/AuthLink";
 import Motion from "@components/Motion";
 import EmotionIcons from "@components/Motion/EmotionIcons";
 import LinkIn from "@components/LinkIn";
-
-import EmotionIcon from "@assets/EmotionIcon";
+import MonthBtn from "@components/Button/MonthBtn";
+import ActionBtn from "@components/Button/ActionBtn";
+import EmotionIcon from "@components/EmotionIcon";
 
 export {
   Landing,
@@ -24,4 +25,6 @@ export {
   EmotionIcons,
   LinkIn,
   EmotionIcon,
+  ActionBtn,
+  MonthBtn,
 };
