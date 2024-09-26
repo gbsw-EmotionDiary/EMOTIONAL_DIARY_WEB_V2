@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import { customAxios } from "@src/api/axios";
 
 const useAuth = () => {
@@ -9,15 +10,28 @@ const useAuth = () => {
   const [passwordCheck, setPasswordCheck] = useState("");
   const [error, setError] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [refreshToken, setRefreshToken] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
-  // 로컬 스토리지에서 사용자 정보 초기화
+  // 쿠키에서 사용자 정보 및 토큰 초기화
   useEffect(() => {
-    const storedId = localStorage.getItem("id");
+    const storedId = Cookies.get("id");
+    const storedAccessToken = Cookies.get("accessToken");
+    const storedRefreshToken = Cookies.get("refreshToken");
+
     if (storedId) {
       setId(storedId);
       setIsLoggedIn(true);
+    }
+
+    if (storedAccessToken) {
+      setAccessToken(storedAccessToken);
+    }
+
+    if (storedRefreshToken) {
+      setRefreshToken(storedRefreshToken);
     }
   }, []);
 
@@ -72,8 +86,13 @@ const useAuth = () => {
       setName(response.data.name);
       setIsLoggedIn(true);
 
-      // 로컬 스토리지에서 사용자 정보 저장
-      localStorage.setItem("id", id);
+      // 쿠키에 사용자 정보 및 토큰 저장
+      Cookies.set("id", id, { expires: 7 }); // 7일 동안 유효
+      Cookies.set("accessToken", response.data.accessToken, { expires: 7 });
+      Cookies.set("refreshToken", response.data.refreshToken, { expires: 7 });
+
+      setAccessToken(response.data.accessToken);
+      setRefreshToken(response.data.refreshToken);
 
       alert("로그인이 완료되었습니다.");
       navigate("/home");
@@ -90,11 +109,15 @@ const useAuth = () => {
     setPassword("");
     setPasswordCheck("");
     setIsLoggedIn(false);
+    setAccessToken(null);
+    setRefreshToken(null);
 
     alert("로그아웃되었습니다.");
 
-    // 로컬 스토리지에서 사용자 정보 제거
-    localStorage.removeItem("id");
+    // 쿠키에서 사용자 정보 및 토큰 제거
+    Cookies.remove("id");
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
   };
 
   return {
@@ -114,4 +137,5 @@ const useAuth = () => {
     handleLogout,
   };
 };
+
 export default useAuth;

@@ -32,6 +32,18 @@ export const HeaderArea = styled.header`
     align-items: center;
     justify-content: space-between;
   }
+
+  @media only screen and (max-width: 600px) {
+    & > header {
+      width: 100%;
+      max-width: 480px;
+      height: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
 `;
 
 export const LoggedInWrap = styled(Link)`

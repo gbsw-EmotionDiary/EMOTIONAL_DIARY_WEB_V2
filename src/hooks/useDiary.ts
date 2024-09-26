@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import moment from "moment";
-import { getDiaries, writeDiary, modifyDiary, deleteDiary } from "@api/diary";
+import Cookies from "js-cookie";
+import { writeDiary, modifyDiary, deleteDiary } from "@api/diary";
+import { customAxios, postWithToken } from "@src/api/axios";
 
 interface Diary {
-  date: string;
+  date: Date;
   title: string;
   content: string;
   emotion: number;
+  userId?: string | null; // userId를 추가
 }
 
 interface DiariesMap {
@@ -15,7 +18,7 @@ interface DiariesMap {
 
 const useDiary = (currentDate: moment.Moment) => {
   const [activeEmotion, setActiveEmotion] = useState<number | null>(null);
-  const [diaries, setDiaries] = useState<DiariesMap>({});
+  const [diaries, setDiaries] = useState<DiariesMap[]>({});
   const [diaryDto, setDiaryDto] = useState<Diary>({
     date: "",
     title: "",
@@ -23,46 +26,47 @@ const useDiary = (currentDate: moment.Moment) => {
     emotion: 0,
   });
 
-  useEffect(() => {
-    fetchDiaries();
-  }, [currentDate]);
+  // 쿠키에서 사용자 ID를 가져옵니다.
+  const userId = Cookies.get("id") || ""; // 기본값을 빈 문자열로 설정
 
-  const fetchDiaries = async () => {
-    try {
-      const data = await getDiaries(
-        currentDate.year(),
-        currentDate.month() + 1
-      );
-      const diariesMap: DiariesMap = {};
-      data.forEach((diary: Diary) => {
-        diariesMap[moment(diary.date).format("YYYY-MM-DD")] = diary;
-      });
-      setDiaries(diariesMap);
-    } catch (error) {
-      alert("일기를 가져오는 중 오류가 발생했습니다.");
-    }
-  };
+  useEffect(() => {
+    const fetchDiarys = async () => {
+      try {
+        const response = await customAxios.get<DiariesMap[]>("/api/diary/get");
+        setDiaries(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchDiarys();
+  }, []);
 
   const handleSaveDiary = async () => {
     try {
+      const updatedDiaryDto = { ...diaryDto, userId }; // 사용자 ID를 diaryDto에 추가
       if (diaries[diaryDto.date]) {
-        await modifyDiary(diaryDto);
+        await modifyDiary(updatedDiaryDto);
       } else {
-        await writeDiary(diaryDto);
+        await writeDiary(updatedDiaryDto);
       }
-      fetchDiaries();
       alert("일기가 저장되었습니다!");
     } catch (error) {
-      alert("일기 저장에 실패했습니다.");
+      console.error("일기 저장 실패:", error); // 오류 로그 추가
+      alert("일기 저장에 실패했습니다. 다시 시도해 주세요.");
     }
   };
 
   const handleDeleteDiary = async () => {
     try {
-      await deleteDiary(diaryDto);
-      fetchDiaries();
+      await postWithToken(token, "/api/diary/write", {
+        ... diaryDto.date,
+        diaryDto.title,
+        diaryDto.content,
+        diaryDto.emotion
+      });
+      alert("일기를 등록했습니다");
     } catch (error) {
-      alert("일기 삭제에 실패했습니다.");
+      console.log(error);
     }
   };
 
@@ -83,7 +87,6 @@ const useDiary = (currentDate: moment.Moment) => {
     diaryDto,
     activeEmotion,
     setDiaryDto,
-    fetchDiaries,
     handleSaveDiary,
     handleDeleteDiary,
     handleInputChange,
